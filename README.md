@@ -1,3 +1,4 @@
 # IDAW-projet
 
-TOUIL_Zouheir_KASSEL_Mohammed_Issam
+TOUIL Zouheir
+KASSEL Mohammed Issam
