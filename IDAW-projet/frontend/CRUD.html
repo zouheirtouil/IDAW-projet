@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+            <title>tabletest</title>
+        <style>
+            body{ margin-top: 5em; }
+            .table {
+            margin-top: 100px;
+            margin-bottom: 100px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <table class="table">
+            <thead>
+            <tr>
+            <th scope="col">Nom</th>
+            </tr>
+            </thead>
+            <tbody id="studentsTableBody">
+            </tbody>
+        </table>
+
+        <form id="addStudentForm" action="" onsubmit="onFormSubmit();">
+            <div class="form-group row">
+                <label for="inputNom" class="col-sm-2 col-form-label">Nom*</label>
+                <div class="col-sm-3">
+                <input type="text" class="form-control" id="inputNom" required="required">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <span class="col-sm-2"></span>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                </div>
+            </div>
+        </form>
+
+
+
+        <script>
+
+
+
+            function formValue(nom){
+                $("#inputNom").val(nom);
+            }
+            function Edit(Id){
+                
+            }
+            let studentMaxId = 1;
+            let students = [];
+
+            function onFormSubmit() {
+            // prevent the form to be sent to the server
+            event.preventDefault();
+
+            let newStudent = {};
+
+            newStudent.nom = $("#inputNom").val();
+            
+            newStudent.Id = studentMaxId;
+            studentMaxId++;
+
+            students.push(newStudent);
+             
+
+            $("#studentsTableBody").append(`
+                        <tr>    
+                            <td>${newStudent.nom}</td>
+                        </tr>`);
+                formValue("","","","","");
+                       
+            }
+            
+        </script>
+    </body>
+</html>

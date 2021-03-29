@@ -1,7 +1,4 @@
-LE Projet de L'UV IDAW
+# IDAW-projet
 
-Réalisé par :
-TOUIl Zouheir
-KASSEL Mohammed ISSAM
-
-
+TOUIL Zouheir
+KASSEL Mohammed Issam
