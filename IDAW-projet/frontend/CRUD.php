@@ -174,24 +174,26 @@
 
                 aliments.push(newAliment);
                 
-                ajouteAliment(newAliment);
+                addAliment(newAliment);
                 
                 formValue("","","","","","");
-                       
-                    
+
             }
 
 
             function addAliment(newAliment){
                 newAliment.id = currentMaxId;
-                $("#alimentsTableBody").append
-                        (`<tr id=aliments-${newAliment.id}> 
-                        <td> ${newAliment.nom}  </td> <td> 
-                        ${newAliment.type}  </td> <td> 
-                        ${newAliment.proteines}  </td> <td> 
-                        ${newAliment.glucides} </td> <td>
-                        ${newAliment.lipides}  </td> <td> 
-                        ${newAlimentsucres}  </td> <td>  `)
+
+                $("#alimentsTableBody").append(`
+                        <tr> 
+                            <td> ${newAliment.nom}  </td> 
+                            <td> ${newAliment.type}  </td>  
+                            <td> ${newAliment.prot}  </td>  
+                            <td> ${newAliment.gluc} </td> 
+                            <td> ${newAliment.lip}  </td>  
+                            <td> ${newAliment.suc}  </td> 
+                        </tr>`)
+
                 if (newFood.id<50){
                     $("#aliments-"+newAliment.id).append
                         (`</tr>`)
