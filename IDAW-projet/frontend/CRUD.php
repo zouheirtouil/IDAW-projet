@@ -94,7 +94,7 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlbackend = "http://localhost/IDAW_projet/backend/";
+            let urlbackend = "http://localhost/IDAW-projet/backend/";
 
 
 
@@ -107,11 +107,12 @@
                         let aliment = {};
                         aliment.nom = a.Nom;
                         aliment.type = a.Type; 
-                        aliment.proteines = a.Proteines;
-                        aliment.glucides = a.Glucides;
-                        aliment.lipides = a.Lipides;
-                        aliment.sucre = a.Sucre;
+                        aliment.prot = a.Proteines;
+                        aliment.gluc = a.Glucides;
+                        aliment.lip = a.Lipides;
+                        aliment.suc= a.Sucres;
                         addAliment(aliment);
+                        
                     });
                 });
             });
@@ -186,14 +187,14 @@
 
 
                 $("#alimentsTableBody").append(`
-                        <tr> 
+                        <tr id=aliments-${newAliment.id}> 
                             <td> ${newAliment.nom}  </td> 
                             <td> ${newAliment.type}  </td>  
                             <td> ${newAliment.prot}  </td>  
                             <td> ${newAliment.gluc} </td> 
                             <td> ${newAliment.lip}  </td>  
-                            <td> ${newAliment.suc}  </td> 
-                        </tr>`)
+                            <td> ${newAliment.suc}  </td> <td>
+                        `)
 
 
                 if (newFood.id<50){
