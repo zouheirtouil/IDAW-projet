@@ -1,8 +1,10 @@
 
-    <head>
+     <head>
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
             <title>tabletest</title>
         <style>
             body{ margin-top: 5em; }
@@ -13,10 +15,13 @@
         </style>
     </head>
 
-    
+ <body>
+     
+ <H1>Table des aliments</H1>
+
 <div>
 
-        <table class="table">
+        <table class="table table-dark">
             <thead>
                 <tr>
                     <th scope="col">Nom de l'aliment</th>
@@ -32,16 +37,16 @@
             <tbody id="alimentsTableBody">
             </tbody>
         </table>
-
+        <h1>Formulaire pour ajouter un aliment</h1>
         <form id="addAlimentForm" action="" onsubmit="onFormSubmit();">
             <div class="form-group row">
-                <label for="inputNomAliment" class="col-sm-2 col-form-label">Nom de l'aliment*</label>
+                <label for="inputNomAliment" class="col-sm-2 col-form-label">Nom de l'aliment</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputNomAliment" required="required">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputType" class="col-sm-2 col-form-label">Type*</label>
+                <label for="inputType" class="col-sm-2 col-form-label">Type</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputType" required="required">
                 </div>
@@ -78,7 +83,7 @@
             <div class="form-group row">
                 <span class="col-sm-2"></span>
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                    <button type="submit" class="btn btn-primary form-control">Envoyer</button>
                 </div>
             </div>
         </form>
@@ -94,7 +99,7 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlbackend = "http://localhost/IDAW-projet/backend/";
+            let urlbackend = "http://localhost:8888/IDAW-projet/IDAW-projet/backend/";
 
 
 
@@ -110,9 +115,8 @@
                         aliment.prot = a.Proteines;
                         aliment.gluc = a.Glucides;
                         aliment.lip = a.Lipides;
-                        aliment.suc= a.Sucres;
+                        aliment.suc = a.Sucres;
                         addAliment(aliment);
-                        
                     });
                 });
             });
@@ -187,17 +191,17 @@
 
 
                 $("#alimentsTableBody").append(`
-                        <tr id=aliments-${newAliment.id}> 
+                        <tr scope="row"> 
                             <td> ${newAliment.nom}  </td> 
                             <td> ${newAliment.type}  </td>  
                             <td> ${newAliment.prot}  </td>  
                             <td> ${newAliment.gluc} </td> 
                             <td> ${newAliment.lip}  </td>  
-                            <td> ${newAliment.suc}  </td> <td>
+                            <td> ${newAliment.suc}  </td> 
                         `)
 
 
-                if (newFood.id<50){
+                if (newAliment.id<50){
                     $("#aliments-"+newAliment.id).append
                         (`</tr>`)
                 }
@@ -211,6 +215,8 @@
            
             
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
 
 </div>
+</body>   
