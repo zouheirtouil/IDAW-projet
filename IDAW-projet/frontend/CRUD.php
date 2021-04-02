@@ -184,6 +184,7 @@
             function addAliment(newAliment){
                 newAliment.id = currentMaxId;
 
+
                 $("#alimentsTableBody").append(`
                         <tr> 
                             <td> ${newAliment.nom}  </td> 
@@ -193,6 +194,7 @@
                             <td> ${newAliment.lip}  </td>  
                             <td> ${newAliment.suc}  </td> 
                         </tr>`)
+
 
                 if (newFood.id<50){
                     $("#aliments-"+newAliment.id).append
