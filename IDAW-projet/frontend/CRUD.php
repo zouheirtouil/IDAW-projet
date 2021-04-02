@@ -1,5 +1,3 @@
-<!doctype html>
-<html lang="fr">
 
     <head>
         <meta charset='utf-8'>
@@ -15,7 +13,9 @@
         </style>
     </head>
 
-    <body>
+    
+<div>
+
         <table class="table">
             <thead>
                 <tr>
@@ -206,5 +206,6 @@
            
             
         </script>
-    </body>
-</html>
+
+
+</div>
