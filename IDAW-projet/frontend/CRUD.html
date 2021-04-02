@@ -94,7 +94,30 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlBackendPrefix = "http://localhost/IDAW_projet/backend/";
+            let urlbackend = "http://localhost/IDAW_projet/backend/";
+
+
+
+            //Partie AJAX
+
+            $(document).ready(function(){
+                $.getJSON(urlbackend+"afficheAliment.php", function(data){ 
+                    aliments = data;
+                    $.each(aliments, function(i, a){
+                        let aliment = {};
+                        aliment.nom = a.Nom;
+                        aliment.type = a.Type; 
+                        aliment.proteines = a.Proteines;
+                        aliment.glucides = a.Glucides;
+                        aliment.lipides = a.Lipides;
+                        aliment.sucre = a.Sucre;
+                        addAliment(aliment);
+                    });
+                });
+            });
+
+
+            
 
 
 
@@ -108,7 +131,8 @@
             }
 
 
-            //Partie AJAX
+            
+
 
 
             function Edit(Id){
@@ -150,22 +174,32 @@
 
                 aliments.push(newAliment);
                 
-
-                $("#alimentsTableBody").append(`
-                            <tr>    
-                                <td>${newAliment.nom}</td>
-                                <td>${newAliment.type}</td>
-                                <td>${newAliment.prot}</td>
-                                <td>${newAliment.gluc}</td>
-                                <td>${newAliment.lip}</td>
-                                <td>${newAliment.suc}</td>
-                                <td>
-                                    <button onclick="Edit(${newAliment.id});"> Edit </button>
-                                </td>
-                            </tr>`);
-                    formValue("","","","","","");
+                ajouteAliment(newAliment);
+                
+                formValue("","","","","","");
                        
                     
+            }
+
+
+            function addAliment(newAliment){
+                newAliment.id = currentMaxId;
+                $("#alimentsTableBody").append
+                        (`<tr id=aliments-${newAliment.id}> 
+                        <td> ${newAliment.nom}  </td> <td> 
+                        ${newAliment.type}  </td> <td> 
+                        ${newAliment.proteines}  </td> <td> 
+                        ${newAliment.glucides} </td> <td>
+                        ${newAliment.lipides}  </td> <td> 
+                        ${newAlimentsucres}  </td> <td>  `)
+                if (newFood.id<50){
+                    $("#aliments-"+newAliment.id).append
+                        (`</tr>`)
+                }
+                else{
+                    $("#aliments-"+newAliment.id).append(`<button onclick="edit(${newAliment.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
+                }         
+                currentMaxId++;
             }
         
 
