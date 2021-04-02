@@ -101,7 +101,7 @@
             //Partie AJAX
 
             $(document).ready(function(){
-                $.getJSON(urlbackend+"afficheAliment.php", function(data){ 
+                $.getJSON(urlbackend+"aliments.php", function(data){ 
                     aliments = data;
                     $.each(aliments, function(i, a){
                         let aliment = {};
