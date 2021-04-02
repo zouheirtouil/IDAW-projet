@@ -188,10 +188,10 @@
                         (`<tr id=aliments-${newAliment.id}> 
                         <td> ${newAliment.nom}  </td> <td> 
                         ${newAliment.type}  </td> <td> 
-                        ${newAliment.proteines}  </td> <td> 
-                        ${newAliment.glucides} </td> <td>
-                        ${newAliment.lipides}  </td> <td> 
-                        ${newAlimentsucres}  </td> <td>  `)
+                        ${newAliment.pro}  </td> <td> 
+                        ${newAliment.gluc} </td> <td>
+                        ${newAliment.lip}  </td> <td> 
+                        ${newAliment.suc}  </td> <td>  `)
                 if (newFood.id<50){
                     $("#aliments-"+newAliment.id).append
                         (`</tr>`)
