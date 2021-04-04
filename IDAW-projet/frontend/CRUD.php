@@ -100,7 +100,7 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlbackend = "http://localhost/IDAW-projet/backend/";
+            let urlbackend = "http://localhost:8888/IDAW-projet/IDAW-projet/backend/";
 
 
 
@@ -149,7 +149,7 @@
                         console.log(response);
                     });
             }
-            function SupprimeAliment(id){
+            function DeleteAliment(id){
                 $.ajax({
                         url: urlbackend+"deleteAliment.php",
                         method: "POST",
@@ -195,9 +195,9 @@
 
             function remove(id){
                 currentMaxId = currentMaxId - 1;
-                aliments.c(id,1);
+                aliments.splice(id,1);
                 $("#aliments-"+id).empty();
-                SupprimeAliment(id);
+                DeleteAliment(id);
             }
     
 
@@ -241,8 +241,7 @@
                             <td> ${newAliment.gluc} </td> 
                             <td> ${newAliment.lip}  </td>  
                             <td> ${newAliment.suc}  </td>
-                            <td><button onclick="Edit(${newAliment.id})" style="color:blue">Edit</button>  
-                            <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> 
+                            <td><button onclick="Edit(${newAliment.id})" style="color:blue">Edit</button> <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> 
                         `)
 
 
