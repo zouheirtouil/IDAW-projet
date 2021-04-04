@@ -100,7 +100,7 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlbackend = "http://localhost:8888/IDAW-projet/IDAW-projet/backend/";
+            let urlbackend = "http://localhost/IDAW-projet/backend/";
 
 
 
@@ -262,8 +262,7 @@
                         ${newAliment.prot}  </td> <td> 
                         ${newAliment.gluc} </td> <td>
                         ${newAliment.lip}  </td> <td> 
-                        ${newAliment.suc}  </td> <td> 
-                        <button onclick="edit(${newAliment.id})" style="color:blue">Edit</button>  <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td>`);
+                        ${newAliment.suc}  </td>`);
             }
            
             
