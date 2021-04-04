@@ -113,7 +113,7 @@
                         let aliment = {};
                         aliment.nom = a.Nom;
                         aliment.type = a.Type; 
-                        aliment.prot = a.Proteines;
+                        aliment.prot = a.Protéines;
                         aliment.gluc = a.Glucides;
                         aliment.lip = a.Lipides;
                         aliment.suc = a.Sucres;
