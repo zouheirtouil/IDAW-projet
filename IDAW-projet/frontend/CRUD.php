@@ -30,6 +30,7 @@
                     <th scope="col">Glucides (g/100g)</th>
                     <th scope="col">Lipides (g/100g)</th>
                     <th scope="col">Sucre (g/100g)</th>
+                    <th scope="col">Edit/Remove</th>
                  </tr>
             </thead>
 
@@ -239,17 +240,16 @@
                             <td> ${newAliment.prot}  </td>  
                             <td> ${newAliment.gluc} </td> 
                             <td> ${newAliment.lip}  </td>  
-                            <td> ${newAliment.suc}  </td> 
+                            <td> ${newAliment.suc}  </td>
+                            <td><button onclick="Edit(${newAliment.id})" style="color:blue">Edit</button>  
+                            <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> 
                         `)
 
 
                 if (newAliment.id<50){
                     $("#aliments-"+newAliment.id).append
                         (`</tr>`)
-                }
-                else{
-                    $("#aliments-"+newAliment.id).append(`<button onclick="edit(${newAliment.id})" style="color:blue">Edit</button>  <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> </tr>`);
-                }         
+                }       
                 currentMaxId++;
             }
         
