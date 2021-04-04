@@ -99,7 +99,7 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlbackend = "http://localhost:8888/IDAW-projet/IDAW-projet/backend/";
+            let urlbackend = "http://localhost/IDAW-projet/backend/";
 
 
 
@@ -124,6 +124,44 @@
 
             
 
+            function sendAliment(aliment){
+                $.ajax({
+                        url: urlbackend+"addAliment.php",
+                        method: "POST",
+                        dataType : "json",
+                        data : aliment
+                    })
+                    .always(function(response){
+                        console.log(response);
+                    });
+            }
+            
+
+            function ChangeAliment(aliment){
+                $.ajax({
+                        url: urlbackend+"editAliment.php",
+                        method: "POST",
+                        dataType : "json",
+                        data : aliment
+                    })
+                    .always(function(response){
+                        console.log(response);
+                    });
+            }
+            function SupprimeAliment(id){
+                $.ajax({
+                        url: urlbackend+"deleteAliment.php",
+                        method: "POST",
+                        dataType : "json",
+                        data : {'id': id}
+                    })
+                    .always(function(response){
+                        console.log(response);
+                    });
+            }
+
+            
+
 
 
             function formValue(nom,type,prot,gluc,lip,suc){
@@ -140,25 +178,25 @@
 
 
 
-            function Edit(Id){
-                currentEditedAlimentId = Id;
-                formValue(aliments[currentEditedAlimentId-1].Nom,
-                        aliments[currentEditedAlimentId-1].Type,
-                        aliments[currentEditedAlimentId-1].Proteines,
-                        aliments[currentEditedAlimentId-1].Glucides,
-                        aliments[currentEditedAlimentId-1].Lipides,
-                        aliments[currentEditedAlimentId-1].Sucre,
+            function Edit(id){
+                currentEditeAlimentId = id;
+                formValue(aliments[currentEditeAlimentId-1].Nom,
+                        aliments[currentEditeAlimentId-1].Type,
+                        aliments[currentEditeAlimentId-1].Proteines,
+                        aliments[currentEditeAlimentId-1].Glucides,
+                        aliments[currentEditeAlimentId-1].Lipides,
+                        aliments[currentEditeAlimentId-1].Sucres,
                         
                     );
                 
             }
 
 
-            function remove(Id){
+            function remove(id){
                 currentMaxId = currentMaxId - 1;
-                aliments.c(Id,1);
-                $("#aliments-"+Id).empty();
-                //AjaxSupprimeAliment(Id);
+                aliments.c(id,1);
+                $("#aliments-"+id).empty();
+                SupprimeAliment(id);
             }
     
 
@@ -174,22 +212,26 @@
                 newAliment.gluc = $("#inputGluc").val();
                 newAliment.lip = $("#inputLip").val();
                 newAliment.suc = $("#inputSuc").val();
-                //newStudent.Id = studentMaxId;
-                //studentMaxId++;
+                
 
-                aliments.push(newAliment);
-                
-                addAliment(newAliment);
-                
-                formValue("","","","","","");
+                if (currentEditeAlimentId >= 0){
+                        editAliment(newAliment);
+                        ChangeAliment(newAliment);
+                        currentAlimentId = -1;
+                        formValue("","","","","","");
+                    }
+                    else{
+                        aliments.push(newAliment);
+                        addAliment(newAliment);
+                        sendAliment(newAliment);
+                        formValue("","","","","","");
+                    }                    
 
             }
 
 
             function addAliment(newAliment){
                 newAliment.id = currentMaxId;
-
-
                 $("#alimentsTableBody").append(`
                         <tr scope="row"> 
                             <td> ${newAliment.nom}  </td> 
@@ -206,12 +248,24 @@
                         (`</tr>`)
                 }
                 else{
-                    $("#aliments-"+newAliment.id).append(`<button onclick="edit(${newAliment.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
+                    $("#aliments-"+newAliment.id).append(`<button onclick="edit(${newAliment.id})" style="color:blue">Edit</button>  <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> </tr>`);
                 }         
                 currentMaxId++;
             }
         
 
+            function editAliment(newAliment){
+                newAliment.id = currentEditeAlimentId;
+                aliments[newAliment.id-1] = newAliment;
+                $("#aliments-"+newAliment.id).empty();
+                $("#aliments-"+newAliment.id).append(`<td> ${newAliment.nom}  </td> <td> 
+                        ${newAliment.type}  </td> <td> 
+                        ${newAliment.prot}  </td> <td> 
+                        ${newAliment.gluc} </td> <td>
+                        ${newAliment.lip}  </td> <td> 
+                        ${newAliment.suc}  </td> <td> 
+                        <button onclick="edit(${newAliment.id})" style="color:blue">Edit</button>  <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td>`);
+            }
            
             
         </script>

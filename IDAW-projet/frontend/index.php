@@ -1,6 +1,8 @@
 <?php
     require_once("template_header.php");
     require_once("template_menu.php");
+    
+
 
     $currentPageId = 'accueil';
 
@@ -17,7 +19,9 @@
 <?php
     renderMenuToHTML($currentPageId);
 ?>
-    
+
+
+
 
 <section class="corps">
     <?php
@@ -28,6 +32,9 @@
         require_once("error.php");
     ?>
 </section>
+
+
+
 
 <?php
         require_once('template_footer.php');
