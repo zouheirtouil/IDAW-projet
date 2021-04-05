@@ -20,7 +20,7 @@
             </tbody>
         </table>
         <h1>Formulaire pour ajouter ou modifier un aliment</h1>
-        <form id="addAlimentForm" action="" onsubmit="onFormSubmit();">
+        <form  id="addAlimentForm" action="" onsubmit="onFormSubmit();">
             <div class="form-group row">
                 <label for="inputNomAliment" class="col-sm-2 col-form-label">Nom de l'aliment</label>
                 <div class="col-sm-3">
@@ -78,7 +78,7 @@
         <script>
 
 
-            let currentMaxId = 1; 
+            let currentMaxId = 2; 
             let aliments = [];
             let currentEditeAlimentId =-1;
             let urlbackend = "http://localhost/IDAW-projet/backend/";
@@ -207,7 +207,8 @@
                         addAliment(newAliment);
                         sendAliment(newAliment);
                         formValue("","","","","","");
-                    }                    
+                    }
+                    window.location.reload();                    
 
             }
 
@@ -225,11 +226,12 @@
                             <td><button onclick="Edit(${newAliment.id})" style="color:blue">Edit</button> <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> 
                         `)
 
-
-                if (newAliment.id<50){
-                    $("#aliments-"+newAliment.id).append
-                        (`</tr>`)
-                }       
+                        
+                
+                    if (newAliment.id<50){
+                        $("#aliments-"+newAliment.id).append
+                            (`</tr>`)
+                    }       
                 currentMaxId++;
             }
         
@@ -246,6 +248,7 @@
                         ${newAliment.suc}  </td>`);
             }
            
+        
             
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

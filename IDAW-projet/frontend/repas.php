@@ -46,7 +46,7 @@
             <div class="form-group row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputEmail">
+                <input type="email" class="form-control" id="inputEmail">
                 </div>
             </div>
             <div class="form-group row">
@@ -193,7 +193,7 @@
                         formValue("","","","","");
                     }    
                                      
-
+                    window.location.reload();
             }
 
 
@@ -229,13 +229,14 @@
                         ${newAliment.aliment} </td> <td>
                         ${newAliment.qnt}  </td>`);
             }
-           
+        
         
 
             
            
             
         </script>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
 

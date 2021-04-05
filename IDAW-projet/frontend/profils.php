@@ -1,4 +1,3 @@
-
 <H1>Table des Utilisateurs</H1>
 
 <div>
@@ -12,53 +11,62 @@
                     <th scope="col">Age </th>
                     <th scope="col">Sexe </th>
                     <th scope="col">Niveau_sportif </th>
-                    <th scope="col">Edit/Remove</th>
                  </tr>
             </thead>
 
 
-            <tbody id="UsersTableBody">
+            <tbody id="utilisateursTableBody">
             </tbody>
         </table>
         <h1>Formulaire pour ajouter  un utilisateur</h1>
-        <form id="addAlimentForm" action="" onsubmit="onFormSubmit();">
+        <form  id="addUtilisateurForm" action="" onsubmit="onFormSubmit();">
             <div class="form-group row">
-                <label for="inputNomAliment" class="col-sm-2 col-form-label">Login Utilisateur</label>
+                <label for="inputLogin" class="col-sm-2 col-form-label">Login Utilisateur</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputNomAliment" required="required">
+                <input type="email" class="form-control" id="inputLogin" required="required">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputType" class="col-sm-2 col-form-label">Nom</label>
+                <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputType" required="required">
+                <input type="text" class="form-control" id="inputNom" required="required">
                 </div>
             </div>
   
             <div class="form-group row">
-                <label for="inputProt" class="col-sm-2 col-form-label">Prenom</label>
+                <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputProt">
+                <input type="text" class="form-control" id="inputPrenom">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputGluc" class="col-sm-2 col-form-label">Age</label>
+                <label for="inputAge" class="col-sm-2 col-form-label">Age</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputGluc">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputLip" class="col-sm-2 col-form-label">Sexe</label>
-                <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputLip">
+                <input type="number" class="form-control" id="inputAge" min="1" max="100">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputSuc" class="col-sm-2 col-form-label">Niveau_sportif</label>
+                <label for="inputSexe" class="col-sm-2 col-form-label">Sexe</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputSuc">
+                <select type="text" class="form-control" id="inputSexe">
+                <option value="">--Please choose an option--</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                    <option value="Autre">Autre</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputNiveau_sportif" class="col-sm-2 col-form-label">Niveau_sportif</label>
+                <div class="col-sm-3">
+                <select type="text" class="form-control" id="inputNiveau_sportif">
+                <option value="">--Please choose an option--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
                 </div>
             </div>
 
@@ -80,8 +88,7 @@
 
 
             let currentMaxId = 1; 
-            let aliments = [];
-            let currentEditeAlimentId =-1;
+            let utilisateurs = [];
             let urlbackend = "http://localhost/IDAW-projet/backend/";
 
 
@@ -90,16 +97,16 @@
 
             $(document).ready(function(){
                 $.getJSON(urlbackend+"utilisateurs.php", function(data){ 
-                    aliments = data;
-                    $.each(aliments, function(i, a){
-                        let aliment = {};
-                        aliment.nom = a.Login;
-                        aliment.type = a.Nom; 
-                        aliment.prot = a.Prenom;
-                        aliment.gluc = a.Age;
-                        aliment.lip = a.Sexe;
-                        aliment.suc = a.Niveau_sportif;
-                        addAliment(aliment);
+                    utilisateurs = data;
+                    $.each(utilisateurs, function(i, a){
+                        let utilisateur = {};
+                        utilisateur.login = a.Login;
+                        utilisateur.nom = a.Nom; 
+                        utilisateur.prenom = a.Prenom;
+                        utilisateur.age = a.Age;
+                        utilisateur.sexe = a.Sexe;
+                        utilisateur.niveau = a.Niveau_sportif;
+                        addUtilisateur(utilisateur);
                     });
                 });
             });
@@ -107,98 +114,69 @@
 
             
 
-            function sendAliment(aliment){
+            function sendUtilisateur(utilisateur){
                 $.ajax({
                         url: urlbackend+"addUtilisateur.php",
                         method: "POST",
                         dataType : "json",
-                        data : aliment
+                        data : utilisateur
                     })
                     .always(function(response){
                         console.log(response);
                     });
             }
             
-            function DeleteAliment(id){
-                $.ajax({
-                        url: urlbackend+"deleteUtilisateur.php",
-                        method: "POST",
-                        dataType : "json",
-                        data : {'id': id}
-                    })
-                    .always(function(response){
-                        console.log(response);
-                    });
-            }
+        
 
 
 
-            function formValue(nom,type,prot,gluc,lip,suc){
-                $("#inputNomAliment").val(nom);
-                $("#inputType").val(type);
-                $("#inputProt").val(prot);
-                $("#inputGluc").val(gluc);
-                $("#inputLip").val(lip);
-                $("#inputSuc").val(suc);
-            }
-
-            function Edit(id){
-                currentEditeAlimentId = id;
-                formValue(aliments[currentEditeAlimentId-1].Login,
-                        aliments[currentEditeAlimentId-1].Nom,
-                        aliments[currentEditeAlimentId-1].Prenom,
-                        aliments[currentEditeAlimentId-1].Age,
-                        aliments[currentEditeAlimentId-1].Sexe,
-                        aliments[currentEditeAlimentId-1].Niveau_sportif,
-                        
-                    );
-                
-            }
-
-            function remove(id){
-                $("#aliments-"+id).empty();
-                DeleteAliment(id);
+            function formValue(login,nom,prenom,age,sexe,niveau){
+                $("#inputLogin").val(login);
+                $("#inputNom").val(nom);
+                $("#inputPrenom").val(prenom);
+                $("#inputAge").val(age);
+                $("#inputSexe").val(sexe);
+                $("#inputNiveau_sportif").val(niveau);
             }
 
             function onFormSubmit() {
                 // prevent the form to be sent to the server
                 event.preventDefault();
 
-                let newAliment = {};
+                let newUtilisateur = {};
 
-                newAliment.nom = $("#inputNomAliment").val();
-                newAliment.type = $("#inputType").val();
-                newAliment.prot = $("#inputProt").val();
-                newAliment.gluc = $("#inputGluc").val();
-                newAliment.lip = $("#inputLip").val();
-                newAliment.suc = $("#inputSuc").val();
+                newUtilisateur.login = $("#inputLogin").val();
+                newUtilisateur.nom = $("#inputNom").val();
+                newUtilisateur.prenom = $("#inputPrenom").val();
+                newUtilisateur.age = $("#inputAge").val();
+                newUtilisateur.sexe = $("#inputSexe").val();
+                newUtilisateur.niveau = $("#inputNiveau_sportif").val();
                 
                    
-                        aliments.push(newAliment);
-                        addAliment(newAliment);
-                        sendAliment(newAliment);
+                        utilisateurs.push(newUtilisateur);
+                        addUtilisateur(newUtilisateur);
+                        sendUtilisateur(newUtilisateur);
                         formValue("","","","","","");
-                                     
+                        window.location.reload();            
 
             }
 
 
-            function addAliment(newAliment){
-                newAliment.id = currentMaxId;
-                $("#UsersTableBody").append(`
+            function addUtilisateur(newUtilisateur){
+                newUtilisateur.id = currentMaxId;
+                $("#utilisateursTableBody").append(`
                         <tr scope="row"> 
-                            <td> ${newAliment.nom}  </td> 
-                            <td> ${newAliment.type}  </td>  
-                            <td> ${newAliment.prot}  </td>  
-                            <td> ${newAliment.gluc} </td> 
-                            <td> ${newAliment.lip}  </td>  
-                            <td> ${newAliment.suc}  </td>
-                            <td><button onclick="Edit(${newAliment.id})" style="color:blue">Edit</button> <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> 
+                            <td> ${newUtilisateur.login}  </td> 
+                            <td> ${newUtilisateur.nom}  </td>  
+                            <td> ${newUtilisateur.prenom}  </td>  
+                            <td> ${newUtilisateur.age} </td> 
+                            <td> ${newUtilisateur.sexe}  </td>  
+                            <td> ${newUtilisateur.niveau}  </td> 
                         `)
 
 
-                if (newAliment.id<19){
-                    $("#aliments-"+newAliment.id).append
+                if (newUtilisateur.id<19){
+                    $("#aliments-"+newUtilisateur.id).append
                         (`</tr>`)
                 }       
                 currentMaxId++;

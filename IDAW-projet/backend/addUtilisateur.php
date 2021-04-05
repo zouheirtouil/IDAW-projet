@@ -6,7 +6,7 @@
 
             $query1 = "INSERT INTO Utilisateur(Login , Nom, Prenom, Age, Sexe, Niveau_sportif) 
             VALUES
-            ( '$_POST[nom]', '$_POST[type]','$_POST[prot]','$_POST[gluc]','$_POST[lip]','$_POST[suc]')
+            ( '$_POST[login]', '$_POST[nom]','$_POST[prenom]','$_POST[age]','$_POST[sexe]','$_POST[niveau]')
             ";
             
             $dbco -> exec($query1);
