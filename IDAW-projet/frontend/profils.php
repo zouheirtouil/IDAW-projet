@@ -1,16 +1,17 @@
- <H1>Table des aliments</H1>
+
+<H1>Table des Utilisateurs</H1>
 
 <div>
 
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Nom de l'aliment</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Protéines (g/100g)</th>
-                    <th scope="col">Glucides (g/100g)</th>
-                    <th scope="col">Lipides (g/100g)</th>
-                    <th scope="col">Sucres (g/100g)</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom </th>
+                    <th scope="col">Age </th>
+                    <th scope="col">Sexe </th>
+                    <th scope="col">Niveau_sportif </th>
                     <th scope="col">Edit/Remove</th>
                  </tr>
             </thead>
@@ -19,43 +20,43 @@
             <tbody id="alimentsTableBody">
             </tbody>
         </table>
-        <h1>Formulaire pour ajouter ou modifier un aliment</h1>
+        <h1>Formulaire pour ajouter  un utilisateur</h1>
         <form id="addAlimentForm" action="" onsubmit="onFormSubmit();">
             <div class="form-group row">
-                <label for="inputNomAliment" class="col-sm-2 col-form-label">Nom de l'aliment</label>
+                <label for="inputNomAliment" class="col-sm-2 col-form-label">Login Utilisateur</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputNomAliment" required="required">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputType" class="col-sm-2 col-form-label">Type</label>
+                <label for="inputType" class="col-sm-2 col-form-label">Nom</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputType" required="required">
                 </div>
             </div>
   
             <div class="form-group row">
-                <label for="inputProt" class="col-sm-2 col-form-label">Protéines(g/100g)</label>
+                <label for="inputProt" class="col-sm-2 col-form-label">Prenom</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputProt">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputGluc" class="col-sm-2 col-form-label">Glucides (g/100g)</label>
+                <label for="inputGluc" class="col-sm-2 col-form-label">Age</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputGluc">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputLip" class="col-sm-2 col-form-label">Lipides (g/100g)</label>
+                <label for="inputLip" class="col-sm-2 col-form-label">Sexe</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputLip">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputSuc" class="col-sm-2 col-form-label">Sucre (g/100g)</label>
+                <label for="inputSuc" class="col-sm-2 col-form-label">Niveau_sportif</label>
                 <div class="col-sm-3">
                 <input type="text" class="form-control" id="inputSuc">
                 </div>
@@ -88,16 +89,16 @@
             //Partie AJAX
 
             $(document).ready(function(){
-                $.getJSON(urlbackend+"aliments.php", function(data){ 
+                $.getJSON(urlbackend+"utilisateurs.php", function(data){ 
                     aliments = data;
                     $.each(aliments, function(i, a){
                         let aliment = {};
-                        aliment.nom = a.Nom;
-                        aliment.type = a.Type; 
-                        aliment.prot = a.Protéines;
-                        aliment.gluc = a.Glucides;
-                        aliment.lip = a.Lipides;
-                        aliment.suc = a.Sucres;
+                        aliment.nom = a.Login;
+                        aliment.type = a.Nom; 
+                        aliment.prot = a.Prenom;
+                        aliment.gluc = a.Age;
+                        aliment.lip = a.Sexe;
+                        aliment.suc = a.Niveau_sportif;
                         addAliment(aliment);
                     });
                 });
@@ -108,7 +109,7 @@
 
             function sendAliment(aliment){
                 $.ajax({
-                        url: urlbackend+"addAliment.php",
+                        url: urlbackend+"addUtilisateur.php",
                         method: "POST",
                         dataType : "json",
                         data : aliment
@@ -118,21 +119,9 @@
                     });
             }
             
-
-            function ChangeAliment(aliment){
-                $.ajax({
-                        url: urlbackend+"editAliment.php",
-                        method: "POST",
-                        dataType : "json",
-                        data : aliment
-                    })
-                    .always(function(response){
-                        console.log(response);
-                    });
-            }
             function DeleteAliment(id){
                 $.ajax({
-                        url: urlbackend+"deleteAliment.php",
+                        url: urlbackend+"deleteUtilisateur.php",
                         method: "POST",
                         dataType : "json",
                         data : {'id': id}
@@ -141,8 +130,6 @@
                         console.log(response);
                     });
             }
-
-            
 
 
 
@@ -155,32 +142,23 @@
                 $("#inputSuc").val(suc);
             }
 
-
-            
-
-
-
             function Edit(id){
                 currentEditeAlimentId = id;
-                formValue(aliments[currentEditeAlimentId-1].Nom,
-                        aliments[currentEditeAlimentId-1].Type,
-                        aliments[currentEditeAlimentId-1].Proteines,
-                        aliments[currentEditeAlimentId-1].Glucides,
-                        aliments[currentEditeAlimentId-1].Lipides,
-                        aliments[currentEditeAlimentId-1].Sucres,
+                formValue(aliments[currentEditeAlimentId-1].Login,
+                        aliments[currentEditeAlimentId-1].Nom,
+                        aliments[currentEditeAlimentId-1].Prenom,
+                        aliments[currentEditeAlimentId-1].Age,
+                        aliments[currentEditeAlimentId-1].Sexe,
+                        aliments[currentEditeAlimentId-1].Niveau_sportif,
                         
                     );
                 
             }
 
-
             function remove(id){
-                currentMaxId = currentMaxId - 1;
-                aliments.splice(id,1);
                 $("#aliments-"+id).empty();
                 DeleteAliment(id);
             }
-    
 
             function onFormSubmit() {
                 // prevent the form to be sent to the server
@@ -195,19 +173,12 @@
                 newAliment.lip = $("#inputLip").val();
                 newAliment.suc = $("#inputSuc").val();
                 
-
-                if (currentEditeAlimentId >= 0){
-                        editAliment(newAliment);
-                        ChangeAliment(newAliment);
-                        currentAlimentId = -1;
-                        formValue("","","","","","");
-                    }
-                    else{
+                   
                         aliments.push(newAliment);
                         addAliment(newAliment);
                         sendAliment(newAliment);
                         formValue("","","","","","");
-                    }                    
+                                     
 
             }
 
@@ -226,7 +197,7 @@
                         `)
 
 
-                if (newAliment.id<50){
+                if (newAliment.id<19){
                     $("#aliments-"+newAliment.id).append
                         (`</tr>`)
                 }       
@@ -234,17 +205,7 @@
             }
         
 
-            function editAliment(newAliment){
-                newAliment.id = currentEditeAlimentId;
-                aliments[newAliment.id-1] = newAliment;
-                $("#aliments-"+newAliment.id).empty();
-                $("#aliments-"+newAliment.id).append(`<td> ${newAliment.nom}  </td> <td> 
-                        ${newAliment.type}  </td> <td> 
-                        ${newAliment.prot}  </td> <td> 
-                        ${newAliment.gluc} </td> <td>
-                        ${newAliment.lip}  </td> <td> 
-                        ${newAliment.suc}  </td>`);
-            }
+            
            
             
         </script>
@@ -252,4 +213,4 @@
 
 
 </div>
-</body>   
+</body>
