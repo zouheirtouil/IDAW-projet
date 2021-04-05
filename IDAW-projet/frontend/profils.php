@@ -17,7 +17,7 @@
             </thead>
 
 
-            <tbody id="alimentsTableBody">
+            <tbody id="UsersTableBody">
             </tbody>
         </table>
         <h1>Formulaire pour ajouter  un utilisateur</h1>
@@ -82,7 +82,7 @@
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditeAlimentId =-1;
-            let urlbackend = "http://localhost:8888/IDAW-projet/IDAW-projet/backend/";
+            let urlbackend = "http://localhost/IDAW-projet/backend/";
 
 
 
@@ -185,7 +185,7 @@
 
             function addAliment(newAliment){
                 newAliment.id = currentMaxId;
-                $("#alimentsTableBody").append(`
+                $("#UsersTableBody").append(`
                         <tr scope="row"> 
                             <td> ${newAliment.nom}  </td> 
                             <td> ${newAliment.type}  </td>  

@@ -1,66 +1,66 @@
- <H1>Table des aliments</H1>
+
+<H1>Journale des Repsas</H1>
 
 <div>
 
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Nom de l'aliment</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Protéines (g/100g)</th>
-                    <th scope="col">Glucides (g/100g)</th>
-                    <th scope="col">Lipides (g/100g)</th>
-                    <th scope="col">Sucres (g/100g)</th>
+                    <th scope="col">Email </th>
+                    <th scope="col">Aliment</th>
+                    <th scope="col">Quantite</th>
                     <th scope="col">Edit/Remove</th>
                  </tr>
             </thead>
 
 
-            <tbody id="alimentsTableBody">
-            </tbody>
+        <tbody id="RepasTableBody">
+        </tbody>
+
         </table>
-        <h1>Formulaire pour ajouter ou modifier un aliment</h1>
-        <form id="addAlimentForm" action="" onsubmit="onFormSubmit();">
+        <h1>Formulaire pour ajouter  un Repas</h1>
+        <form id="addRepasForm" action="" onsubmit="onFormSubmit();">
             <div class="form-group row">
-                <label for="inputNomAliment" class="col-sm-2 col-form-label">Nom de l'aliment</label>
+                <label for="inputDateRepas" class="col-sm-2 col-form-label">Date</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputNomAliment" required="required">
+                <input type="date" class="form-control" id="inputDateRepas" required="required">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputType" class="col-sm-2 col-form-label">Type</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputType" required="required">
+                <select type="text" class="form-control" id="inputType" required="required">
+                    <option value="">--Please choose an option--</option>
+                    <option value="Petit Dejouner">Petit Dejouner</option>
+                    <option value="Dejouner">Dejouner</option>
+                    <option value="Gouter">Gouter</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Autre">Autre</option>
+                </select>
                 </div>
             </div>
   
-            <div class="form-group row">
-                <label for="inputProt" class="col-sm-2 col-form-label">Protéines(g/100g)</label>
-                <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputProt">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputGluc" class="col-sm-2 col-form-label">Glucides (g/100g)</label>
-                <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputGluc">
-                </div>
-            </div>
 
             <div class="form-group row">
-                <label for="inputLip" class="col-sm-2 col-form-label">Lipides (g/100g)</label>
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputLip">
+                <input type="text" class="form-control" id="inputEmail">
                 </div>
             </div>
-
             <div class="form-group row">
-                <label for="inputSuc" class="col-sm-2 col-form-label">Sucre (g/100g)</label>
+                <label for="inputAliment" class="col-sm-2 col-form-label">Aliment</label>
                 <div class="col-sm-3">
-                <input type="text" class="form-control" id="inputSuc">
+                <input type="text" class="form-control" id="inputAliment">
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label for="inputQuantite" class="col-sm-2 col-form-label">Quantite</label>
+                <div class="col-sm-3">
+                <input type="text" class="form-control" id="inputQuantite">
+                </div>
+            </div>
 
             <div class="form-group row">
                 <span class="col-sm-2"></span>
@@ -73,13 +73,11 @@
 
 
 
-
-
         <script>
 
 
             let currentMaxId = 1; 
-            let aliments = [];
+            let repas = [];
             let currentEditeAlimentId =-1;
             let urlbackend = "http://localhost/IDAW-projet/backend/";
 
@@ -88,27 +86,25 @@
             //Partie AJAX
 
             $(document).ready(function(){
-                $.getJSON(urlbackend+"aliments.php", function(data){ 
-                    aliments = data;
-                    $.each(aliments, function(i, a){
+                $.getJSON(urlbackend+"repas.php", function(data){ 
+                    repas = data;
+                    $.each(repas, function(i, a){
                         let aliment = {};
-                        aliment.nom = a.Nom;
+                        aliment.date = a.Date;
                         aliment.type = a.Type; 
-                        aliment.prot = a.Protéines;
-                        aliment.gluc = a.Glucides;
-                        aliment.lip = a.Lipides;
-                        aliment.suc = a.Sucres;
+                        aliment.email = a.Email;
+                        aliment.aliment = a.Aliment;
+                        aliment.qnt = a.Quantite;
                         addAliment(aliment);
                     });
                 });
             });
 
 
-            
 
             function sendAliment(aliment){
                 $.ajax({
-                        url: urlbackend+"addAliment.php",
+                        url: urlbackend+"addRepas.php",
                         method: "POST",
                         dataType : "json",
                         data : aliment
@@ -117,11 +113,9 @@
                         console.log(response);
                     });
             }
-            
-
             function ChangeAliment(aliment){
                 $.ajax({
-                        url: urlbackend+"editAliment.php",
+                        url: urlbackend+"editRepas.php",
                         method: "POST",
                         dataType : "json",
                         data : aliment
@@ -130,9 +124,11 @@
                         console.log(response);
                     });
             }
+
+
             function DeleteAliment(id){
                 $.ajax({
-                        url: urlbackend+"deleteAliment.php",
+                        url: urlbackend+"deletRepas.php",
                         method: "POST",
                         dataType : "json",
                         data : {'id': id}
@@ -142,45 +138,34 @@
                     });
             }
 
-            
 
 
-
-            function formValue(nom,type,prot,gluc,lip,suc){
-                $("#inputNomAliment").val(nom);
+            function formValue(date,type,email,aliment,qnt){
+                $("inputDateRepas").val(date);
                 $("#inputType").val(type);
-                $("#inputProt").val(prot);
-                $("#inputGluc").val(gluc);
-                $("#inputLip").val(lip);
-                $("#inputSuc").val(suc);
+                $("#inputEmail").val(email);
+                $("#inputAliment").val(aliment);
+                $("#inputQuantite").val(qnt);
             }
-
-
-            
-
-
 
             function Edit(id){
                 currentEditeAlimentId = id;
-                formValue(aliments[currentEditeAlimentId-1].Nom,
-                        aliments[currentEditeAlimentId-1].Type,
-                        aliments[currentEditeAlimentId-1].Proteines,
-                        aliments[currentEditeAlimentId-1].Glucides,
-                        aliments[currentEditeAlimentId-1].Lipides,
-                        aliments[currentEditeAlimentId-1].Sucres,
+                formValue(repas[currentEditeAlimentId-1].Date,
+                        repas[currentEditeAlimentId-1].Type,
+                        repas[currentEditeAlimentId-1].Email,
+                        repas[currentEditeAlimentId-1].Aliment,
+                        repas[currentEditeAlimentId-1].Quantite,
                         
                     );
                 
             }
 
-
             function remove(id){
-                currentMaxId = currentMaxId - 1;
-                aliments.splice(id,1);
-                $("#aliments-"+id).empty();
+                $("#repas-"+id).empty();
                 DeleteAliment(id);
             }
-    
+
+
 
             function onFormSubmit() {
                 // prevent the form to be sent to the server
@@ -188,63 +173,66 @@
 
                 let newAliment = {};
 
-                newAliment.nom = $("#inputNomAliment").val();
+                newAliment.date = $("#inputDateRepas").val();
                 newAliment.type = $("#inputType").val();
-                newAliment.prot = $("#inputProt").val();
-                newAliment.gluc = $("#inputGluc").val();
-                newAliment.lip = $("#inputLip").val();
-                newAliment.suc = $("#inputSuc").val();
-                
+                newAliment.email = $("#inputEmail").val();
+                newAliment.aliment = $("#inputAliment").val();
+                newAliment.qnt = $("#inputQuantite").val();
 
+                
                 if (currentEditeAlimentId >= 0){
                         editAliment(newAliment);
                         ChangeAliment(newAliment);
                         currentAlimentId = -1;
-                        formValue("","","","","","");
+                        formValue("","","","","");
                     }
                     else{
-                        aliments.push(newAliment);
+                        repas.push(newAliment);
                         addAliment(newAliment);
                         sendAliment(newAliment);
-                        formValue("","","","","","");
-                    }                    
+                        formValue("","","","","");
+                    }    
+                                     
 
             }
 
 
             function addAliment(newAliment){
                 newAliment.id = currentMaxId;
-                $("#alimentsTableBody").append(`
+                $("#RepasTableBody").append(`
                         <tr scope="row"> 
-                            <td> ${newAliment.nom}  </td> 
+                            <td> ${newAliment.date}  </td> 
                             <td> ${newAliment.type}  </td>  
-                            <td> ${newAliment.prot}  </td>  
-                            <td> ${newAliment.gluc} </td> 
-                            <td> ${newAliment.lip}  </td>  
-                            <td> ${newAliment.suc}  </td>
+                            <td> ${newAliment.email}  </td> 
+                            <td> ${newAliment.aliment} </td> 
+                            <td> ${newAliment.qnt}  </td>
                             <td><button onclick="Edit(${newAliment.id})" style="color:blue">Edit</button> <button onclick="remove(${newAliment.id})" style="color:blue">Remove</button> </td> 
                         `)
 
 
-                if (newAliment.id<50){
-                    $("#aliments-"+newAliment.id).append
+                if (newAliment.id<19){
+                    $("#repas-"+newAliment.id).append
                         (`</tr>`)
                 }       
                 currentMaxId++;
             }
-        
+
 
             function editAliment(newAliment){
                 newAliment.id = currentEditeAlimentId;
-                aliments[newAliment.id-1] = newAliment;
-                $("#aliments-"+newAliment.id).empty();
-                $("#aliments-"+newAliment.id).append(`<td> ${newAliment.nom}  </td> <td> 
+                repas[newAliment.id-1] = newAliment;
+                $("#repas-"+newAliment.id).empty();
+                $("#repas-"+newAliment.id).append(`<td> 
+                        ${newAliment.date}  </td> <td> 
                         ${newAliment.type}  </td> <td> 
-                        ${newAliment.prot}  </td> <td> 
-                        ${newAliment.gluc} </td> <td>
-                        ${newAliment.lip}  </td> <td> 
-                        ${newAliment.suc}  </td>`);
+                        ${newAliment.email}  </td> <td> 
+                        ${newAliment.aliment} </td> <td>
+                        ${newAliment.qnt}  </td>`);
             }
+           
+        
+
+            
            
             
         </script>
@@ -252,4 +240,4 @@
 
 
 </div>
-</body>   
+</body>

@@ -5,7 +5,7 @@
                 // idPage titre
                 'accueil' => array( 'Accueil' ),
                 'CRUD' => array('Aliments'),
-                'journal' => array('Journal'),
+                'repas' => array('Journal'),
                 'profils' => array('Profils'),
 
                 
